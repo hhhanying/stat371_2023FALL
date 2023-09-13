@@ -1,0 +1,154 @@
+---
+title: "Stat 371 Week 1"
+author: "Hanying Jiang"
+date: "Sep 2023"
+output:
+  xaringan::moon_reader:
+    css: ["default", "css/xaringan-themer.css"]
+    lib_dir: libs
+    self_contained: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      ratio: "16:9"
+    seal: false
+
+---
+
+class:title
+
+
+$\def\Dir{\text{Dir}}$
+$\def\E{\mathbb{E}}$
+$\def\Mult{\text{Mult}}$
+$\def\*#1{\mathbf{#1}}$
+$\def\m#1{\boldsymbol{#1}}$
+$\def\Unif{\text{Unif}}$
+$\def\win{\tilde{w}_{\text{in}}}$
+$\def\reals{\mathbb{R}}$
+$\def\Gsn{\mathcal{N}}$
+$\def\argmin{arg\,min}$
+$\newcommand{\wout}{\tilde w_{\text{out}}}$
+$\newcommand{\vec}{\textit}$
+
+```{r, echo = FALSE, warnings = FALSE, message = FALSE}
+library(RefManageR)
+library(knitr)
+library(tidyverse)
+library(glue)
+opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, dpi = 200, fig.align = "center", fig.width = 6, fig.height = 3, eval = TRUE)
+opts_knit$set(eval.after = "fig.cap")
+set.seed(20230120)
+
+# BibOptions(cite.style = "authoryear")
+# bib <- ReadBib("ref.bib")
+```
+
+
+.center[
+<br/>
+## Stat 371 Week 1
+<br/>
+<br/>
+]
+
+.pull-right[
+Sep 2023
+
+Hanying Jiang
+
+
+[hjiang252@wisc.edu](hjiang252@wisc.edu)
+]
+
+---
+
+### Greetings
+
+* My name: Hanying Jiang
+* Email: hjiang252@wisc.edu
+* Office hours: 2:15pm-3:45pm on Monday (B315 MSC)
+
+---
+
+### Outline
+
+1. R and RStudio installation (15 min at most)
+2. Download homework files (make sure you know the file location)
+3. Show how to use auto-grader
+4. Introduce to Rstudio
+5. Show how to submit homework
+6. Share other resources.
+7. Example of basic R commands.
+
+---
+
+### Installation
+
+<!--  start install -->
+<!--  if unable to, use Rstudio cloud now and seek help from SLC later -->
+
+If you hasn't install R and RStudio, please start now.
+
+Find instruction in Canvas: home -> start here -> find the link
+
+If you have difficulty installing them, you can also use [RStudio cloud](https://login.rstudio.cloud/) for now and seek help in Learning Center later.
+
+```{r, out.width = 150, out.height = 200, echo = FALSE}
+include_graphics("figures/install_instr.png")
+```
+
+
+---
+
+### Docuwnload homework files
+
+1. Create a folder for HW1 files (recommennded).
+2. Home > Week 1 > HW 1 Sub > Click `HWK1.pdf` and `HWK1.Rmd` to download. (You can open `HWK1.Rmd` in RStudio, and you can knit it to `HWK1.pdf`.)
+
+---
+
+### Autograder
+
+* Read the instructions.
+* Show how to take the quiz.
+* Show how to check the grades and details.
+* Understand that you can submit 3 times at most.
+
+---
+
+
+### RStudio layout
+
+The Rstudio window usually has four panels as in the figure below. When you open it, you might fail to find the source panel. That is because that there is no file open.
+
+```{r, out.width = 450, out.height = 300, echo = FALSE}
+include_graphics("figures/rst_layout.jpeg")
+```
+
+---
+
+### RStudio layout: Open the .Rmd file in RStudio
+
+Use the file panel in RStudio to open the `HWK1.Rmd` file.
+
+---
+
+### set working directory
+
+We will explain the importance of working directory. For now, we can practice to set the current working directory to the desired folder.
+
+Goal: set current working directory to the folder containing all homework materials (example: `home/Documents/Stat371/HW/HW1`).
+
+If you already open the folder in file panel, you can click: Session > Set Working Directory > To files pane location
+
+(Optional) There is a function `setwd()` in R. You can try to run `setwd(target_path)`, where the `target_path` is the location for your homework files. In my case, I would run `setwd("home/Documents/Stat371/HW/HW1")`.
+
+---
+
+### Resave the .Rmd file
+
+You might want to keep a copy of the homework materials and work on another version. You can simply copy the file, or use File > Save As to resave it as another file.
+
+---
+

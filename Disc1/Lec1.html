@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Stat 371 Week 1</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Hanying Jiang" />
+    <script src="libs/header-attrs-2.24/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class:title
+
+
+`\(\def\Dir{\text{Dir}}\)`
+`\(\def\E{\mathbb{E}}\)`
+`\(\def\Mult{\text{Mult}}\)`
+`\(\def\*#1{\mathbf{#1}}\)`
+`\(\def\m#1{\boldsymbol{#1}}\)`
+`\(\def\Unif{\text{Unif}}\)`
+`\(\def\win{\tilde{w}_{\text{in}}}\)`
+`\(\def\reals{\mathbb{R}}\)`
+`\(\def\Gsn{\mathcal{N}}\)`
+`\(\def\argmin{arg\,min}\)`
+`\(\newcommand{\wout}{\tilde w_{\text{out}}}\)`
+`\(\newcommand{\vec}{\textit}\)`
+
+
+
+
+.center[
+&lt;br/&gt;
+## Stat 371 Week 1
+&lt;br/&gt;
+&lt;br/&gt;
+]
+
+.pull-right[
+Sep 2023
+
+Hanying Jiang
+
+
+[hjiang252@wisc.edu](hjiang252@wisc.edu)
+]
+
+---
+
+### Greetings
+
+* My name: Hanying Jiang
+* Email: hjiang252@wisc.edu
+* Office hours: 2:15pm-3:45pm on Monday (B315 MSC)
+
+---
+
+### Outline
+
+1. R and RStudio installation (15 min at most)
+2. Download homework files (make sure you know the file location)
+3. Show how to use auto-grader
+4. Introduce to Rstudio
+5. Show how to submit homework
+6. Share other resources.
+7. Example of basic R commands.
+
+---
+
+### Installation
+
+&lt;!--  start install --&gt;
+&lt;!--  if unable to, use Rstudio cloud now and seek help from SLC later --&gt;
+
+If you hasn't install R and RStudio, please start now.
+
+Find instruction in Canvas: home -&gt; start here -&gt; find the link
+
+If you have difficulty installing them, you can also use [RStudio cloud](https://login.rstudio.cloud/) for now and seek help in Learning Center later.
+
+&lt;img src="figures/install_instr.png" width="150" height="200" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+### Docuwnload homework files
+
+1. Create a folder for HW1 files (recommennded).
+2. Home &gt; Week 1 &gt; HW 1 Sub &gt; Click `HWK1.pdf` and `HWK1.Rmd` to download. (You can open `HWK1.Rmd` in RStudio, and you can knit it to `HWK1.pdf`.)
+
+---
+
+### Autograder
+
+* Read the instructions.
+* Show how to take the quiz.
+* Show how to check the grades and details.
+* Understand that you can submit 3 times at most.
+
+---
+
+
+### RStudio layout
+
+The Rstudio window usually has four panels as in the figure below. When you open it, you might fail to find the source panel. That is because that there is no file open.
+
+&lt;img src="figures/rst_layout.jpeg" width="450" height="300" style="display: block; margin: auto;" /&gt;
+
+---
+
+### RStudio layout: Open the .Rmd file in RStudio
+
+Use the file panel in RStudio to open the `HWK1.Rmd` file.
+
+---
+
+### set working directory
+
+We will explain the importance of working directory. For now, we can practice to set the current working directory to the desired folder.
+
+Goal: set current working directory to the folder containing all homework materials (example: `home/Documents/Stat371/HW/HW1`).
+
+If you already open the folder in file panel, you can click: Session &gt; Set Working Directory &gt; To files pane location
+
+(Optional) There is a function `setwd()` in R. You can try to run `setwd(target_path)`, where the `target_path` is the location for your homework files. In my case, I would run `setwd("home/Documents/Stat371/HW/HW1")`.
+
+---
+
+### Resave the .Rmd file
+
+You might want to keep a copy of the homework materials and work on another version. You can simply copy the file, or use File &gt; Save As to resave it as another file.
+
+---
+
+### Workflow for finishing homework using Rmarkdown
+
+1. Change the author name to your name;
+2. Solve the problem set;
+3. Knit it into pdf/html/word;
+4. Check the file;
+5. Submit in Canvas.
+
+
+---
+
+### Homework submission
+
+* Finishing homework in Rmarkdown and submitting the knitted is highly recommended, but not mandatory. Other files are acceptable (see details in syllabus).
+* You are supposed to include all work in one neat file and submit it.
+  * If you are submitting a file knitted from Rmarkdown, please check the file before you submit it to avoid knitting error or wrong submission.
+  * If you are submitting other files, please make sure that you have included the codes to generate the output, too.
+* You can submit the file for arbitrary times, but we will only grade the latest submission.
+
+---
+
+### Other resources
+
+
+* Piazza in Canvas.
+* Office hours. (You can attend office hours of any TA for this course.)
+* Learning center. (You can seek help from any TA there, even if they don't teach STAT 371. If you have difficulty finding TA for help, you can go to the manager there.)
+
+
+&lt;!-- It is not encouraged to ask complicated questions in Piazza.  --&gt;
+
+---
+
+### Practice
+
+Try to knit the current `.Rmd` file into a `.pdf` file.
+
+---
+
+### Practice
+
+Create a R chunk in Rmarkdown.
+
+---
+
+### Review of basic R commands
+
+Simple example.
+
+
+```r
+# This is a command
+print("Hello class!") # print
+```
+
+```
+## [1] "Hello class!"
+```
+
+```r
+10 + 2 * 3 + 5 ^ 3 # evaluating the value of an expression
+```
+
+```
+## [1] 141
+```
+
+---
+
+### Review of basic R commands
+
+Create an object in R: if you have some data to analyze, you might not want to type it every time when you need it. Thus, you can create an object in R and call it by the name when you want to go back to it later.
+
+The following code will create an object `a` in R. It's a number of value 371.
+
+
+```r
+a = 371
+print(a)
+```
+
+```
+## [1] 371
+```
+
+```r
+a * 2
+```
+
+```
+## [1] 742
+```
+
+---
+
+### Review of basic R commands
+
+In R, the more formal way to assign value to an object is `&lt;-`. It is equivalent to `=`.
+
+
+```r
+# The following lines are equal
+a &lt;- 371
+a = 371
+```
+
+
+---
+
+### Review of basic R commands
+
+Use `c()` to create a vector.
+
+The following code will generate a vector named `b` that contains elements 1, 3, 2, 76, and 3.
+
+
+```r
+b &lt;- c(1, 3, 2, 76, 3)
+```
+
+---
+
+### Review of basic R commands
+
+Extract values from the vector.
+
+
+```r
+b[2]
+```
+
+```
+## [1] 3
+```
+
+```r
+indices &lt;- c(1, 3, 5)
+print(indices)
+```
+
+```
+## [1] 1 3 5
+```
+
+```r
+b[indices]
+```
+
+```
+## [1] 1 2 3
+```
+
+---
+
+### Review of basic R commands
+
+Use `:` to generate vector of integer sequence.
+
+
+```r
+1:5
+```
+
+```
+## [1] 1 2 3 4 5
+```
+
+```r
+-2:3
+```
+
+```
+## [1] -2 -1  0  1  2  3
+```
+
+---
+
+### Review of basic R commands
+
+`seq()` (optional)
+
+
+```r
+seq(1, 11, by = 2)
+```
+
+```
+## [1]  1  3  5  7  9 11
+```
+
+---
+
+### Review of basic R commands
+
+`rep()`
+
+
+```r
+# generate a vector containing 11 1's.
+rep(1, 11)
+```
+
+```
+##  [1] 1 1 1 1 1 1 1 1 1 1 1
+```
+
+Guess the output?
+
+
+```r
+c(rep(1, 2), rep(2, 3))
+```
+
+```
+## [1] 1 1 2 2 2
+```
+
+---
+
+### Review of basic R commands
+
+Use `help()` to find the help document in R.
+
+Run the following code and read the help document for `hist()`:
+
+
+```r
+help("hist")
+```
+
+---
+
+### Review of basic R commands
+
+Run the following code to generate a vector `a` containing 100 random values from standard normal distribution. You don't need to understand the code.
+
+
+```r
+a &lt;- rnorm(100) # no need to understand this line
+```
+
+Let's try to create a histogram of a. You can check the value of `a` by running `print(a)` or simply `a` first. 
+
+---
+
+### Review of basic R commands
+
+Now run the following code:
+
+
+```r
+hist(a)
+```
+
+&lt;img src="Lec1_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Review of basic R commands
+
+As you read from the help document, you don't need to provide breakpoints for R to generate the figure. And R choosed the bar width to be 0.5. What if I want to make the bar width to be 1, and use -3, -2,..., 3 to be the breakpoints?
+
+---
+
+### Review of basic R commands
+
+
+
+```r
+hist(a, breaks = -3:3)
+```
+
+&lt;img src="Lec1_files/figure-html/unnamed-chunk-16-1.png" style="display: block; margin: auto;" /&gt;
+
+You can check the usage of `ylim` in the help document and try it.
+
+---
+
+### practice
+
+Use the `error_data` in homework 1 Exercise 2 to generate a histogram and try to use the different arguments in `hist()`.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
