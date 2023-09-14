@@ -89,25 +89,49 @@ Try to run `View(lbw)` or click `lbw` in the environment.
 
 ### 2(a)
 
-Identify the variable type for each of the three variables based on the description.
+* bwt is the birth weight (in grams) for each of the 189 babies observed.
+* low is a variable that is 0 if the birth weight is at least 2500 g and 1 if the birth weight is less than
+2500 g.
+* smoke is a variable that is 0 if mother reported not smoking during pregnancy and 1 if mother reported smoking during pregnancy.
+
+Identify the variable type for each of the three variables based on the description. Check the variable type in R. Does the data type in R agree with the true meaning of these variables?
+
+
 
 > The birth weight is numeric. However, `low` and `smooke` are indicators and are categorical variables. They are recognized as integers (int) and thus numeric.
 
-### 2(b)(c)
+### 2(b)
 
-Run the following code. and pay attention to the usage of `$` sign.
+Run the following code to resave low and smoke as categorical vectors in the lbw data frame.
+Notice the $ after the data frame name lbw pulls up a list of all of the columns that are
+defined in lbw. And the as.factor() function changes the variable type to categorical.
 
 
 ```{r}
 lbw$low <- as.factor(lbw$low)
 lbw$smoke <- as.factor(lbw$smoke)
+```
+
+### 2(c)
+
+Reference the Environment tab or rerun str(lbw) to confirm low and smoke have been updated correctly.
+
+```{r}
 str(lbw)
 ```
 
 
 ## Exercise 3
 
-### 3a(i) 
+Consider comparing the variable for birthweight (bwt) across the groups with smoke = 0 (non smoking) and smoke = 1 (smoking).
+
+### 3a
+
+Create comparative boxplots and histograms of the variable bwt between babies with mothers who had smoking status of 0 = No and 1 = Yes.
+
+### 3a(i)
+
+Save off two data frames, SmokeY and SmokeN, to hold the data for those babies whose mothers smoked and those whose did not
 
 ```{r}
 SmokeY <- subset(lbw, smoke == "1")
@@ -117,12 +141,17 @@ SmokeN <- subset(lbw, smoke == "0")
 
 ### 3a(ii)
 
+Then save off the two vectors of bwt for those two dataframes into bwtSmokeY and bwtSmokeN.
+
 ```{r}
 bwtSmokeY <- SmokeY$bwt
 bwtSmokeN <- SmokeN$bwt
 ```
 
 ### 3a(iii)
+
+Update the following boxplot code to include labels that show which data is which.
+
 
 Original code:
 
@@ -140,11 +169,13 @@ boxplot(bwtSmokeN, bwtSmokeY, names = c("No Smoke", "Smoke"),
 
 ### 3a(iv)
 
+Update the following histogram code so that both histgrams have x axis classes from 0 to 5000 with a width of 250.
+
 Original code: 
 
 ```{r}
 # this makes two rows and 1 column for graphs
-par(mfrow = c(2,1))
+par(mfrow = c(1,2))
 
 hist(bwtSmokeY, 
      main = "Smoking Mothers", xlab = "Birthweight")
@@ -179,10 +210,12 @@ hist(bwtSmokeN, breaks = seq(0, 5000, 250),
 par(mfrow = c(1,1)) 
 ```
 
-Now try to select a more suitable range for y-axis. Observe the figures, we can see the highest bar is around 15.
+
+Also, choose a more useful y axis for both graphs.
+
+Observe the figures, we can see the highest bar is around 15.
 
 ```{r}
-# this makes two rows and 1 column for graphs
 par(mfrow = c(2,1))
 
 hist(bwtSmokeY, breaks = seq(0, 5000, 250), ylim = c(0, 15),
@@ -191,7 +224,6 @@ hist(bwtSmokeY, breaks = seq(0, 5000, 250), ylim = c(0, 15),
 hist(bwtSmokeN, breaks = seq(0, 5000, 250), ylim = c(0, 15),
      main = "Non Smoking Mothers", xlab = "Birthweight")
 
-# this makes one row and one column for graphing (restoring to default)
 par(mfrow = c(1,1)) 
 ```
 
@@ -211,7 +243,13 @@ hist(bwtSmokeN, breaks = seq(0, 5000, 250), ylim = c(0, 20),
 par(mfrow = c(1,1)) 
 ```
 
+Why is it important that the x and y axis are consistent across the two histograms?
+
+
+
 ### 3(b)
+
+Compare the center, variability and shape of the two groups’ data using the graphs and numeric summaries. Write your own code to find the numeric summaries. 
 
 Figures we have:
 
@@ -269,6 +307,7 @@ Check with the numeric summaries:
 # quantiles
 quantile(bwtSmokeN)
 quantile(bwtSmokeY)
+
 # standard deciation
 sd(bwtSmokeN)
 sd(bwtSmokeY)
@@ -276,6 +315,14 @@ sd(bwtSmokeY)
 IQR for non-smoking: 3621.5 - 2509.0 = 1112.5.
 
 IQR for smoking: 3245.75 - 2370.50 = 875.25.
+
+(Can directly use `IQR` function)
+
+```{r}
+IQR(bwtSmokeN)
+IQR(bwtSmokeY)
+```
+
 
 We can see that the smoking group has a smaller standard deviation and IQR, which implies that they has smaller variability, which agrees with our observation from the figures.
 
