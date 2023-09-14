@@ -10,6 +10,18 @@ output:
 
 In our discussion, students are supposed to form random small groups and discuss with each other.
 
+## Main takeaways
+
+* Use `read.csv` function to read data from a `.csv` file.
+* Use `$` to extract one column from a data frame.
+* Use `as.factor()` to transfer a numeric variable to be categorical variable.
+* Use `str()` to check the data structure (or try to click the arrow near the variable name in the environment panel).
+* Use `View()` to open the data (or try to click the variable name in the environment panel.)
+* Use `boxplot()` to create boxplots and add names.
+* Use `hist()` to generate histograms and change the breakpoints and y axis range.
+* U
+
+
 
 ## Check usage of homework auto-grade and submission
 
