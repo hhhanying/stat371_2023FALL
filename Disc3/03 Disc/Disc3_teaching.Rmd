@@ -1,0 +1,191 @@
+---
+title: "Discussion 3"
+author: "Hanying"
+output:
+  html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Warmup
+
+Work on the Week 3 Quiz question 4 with your neighbor.
+
+### Question 4
+A manufacturer of carbon monoxide detectors knows that 2% of its detectors are in some way defective, so the company selects 4 detectors to undergo inspection.
+
+4.1 Assuming that the detectors are independent, what is the probability that a randomly selected detector is not defective?
+
+4.2 Find the probability that all 44 detectors are NOT defective.
+
+4.3 Find the probability that at least one of the selected detectors is defective. 
+
+### Solution
+
+4.1 1 - 2% = 0.98
+
+4.2 0.98 ^ 4 = 0.92
+
+4.3 1 - 0.92 = 0.08
+
+
+
+## Relationship between two variables within a single group
+
+Group discussion for ~ 15 minutes. Stand the "Finish" sign up on the table after finished.
+
+### Question
+
+**Exercise 1.** Reconsider the low birth weight data set in lbw.csv from discussion 2. It contains information on 189 births to women that were seen in the obstetrics clinic. (Available in LogisticDx package). We will now look at the relationship between low birth weight and smoking by looking at the two categorical variables low (low birth weight) and smoke (0: no smoke, 1: smoke). 
+
+Optionally run the code below to generate the contingency table relating low birth weight and smoking status (change eval=TRUE).
+
+```{r, include = FALSE, eval = FALSE}
+# read in lbw.csv after saving .csv and .Rmd in same folder
+lbw <- read.csv("lbw.csv", header=TRUE)
+
+# resave low and smoke as categorical vectors in the lbw data frame.
+lbw$low <- as.factor(lbw$low)
+lbw$smoke <- as.factor(lbw$smoke)
+
+# make a new data frame with just the 2nd and 3rd columns (low and smoke) 
+lbw.small <- lbw[,c(2,3)] 
+
+# the table() function and R will make a contingency table for us
+table(lbw.small)
+```
+
+|                | No Smoke | Yes Smoke | Total |
+|:--------------:|:--------:|:---------:|:-----:|
+| Not Low Weight     | 86       | 44        | 130   |
+| Low Weight | 29       | 30        | 59    |
+| Total          | 115      | 74        | 189   |
+
+> a. If we were to choose one of the babies at random from these 189, what is the probability that the baby had low birth weight?
+
+> b. If we were to choose three babies at random from these 189 (without replacement), what is the probability that all three had low birth weight?
+
+> c. If we choose one of the babies with low birth weight at random to evaluate further, what is the probability that they had a mother who did smoke?
+
+> d. To what quantity should you compare the value from part (c) to see if there is a mathematical independence between low birth weight and mother's smoking in this group of 189 observations? Do this comparison and draw a conclusion.
+
+\vspace{1cm}
+
+
+### 1(a)
+
+If we were to choose one of the babies at random from these 189, what is the probability that the baby had low birth weight?
+
+$P(\text{low birth weight}) = \frac{n(\text{low birth weight})}{N} = \frac{59}{189} =  0.3121693$
+
+### 1(b)
+
+If we were to choose three babies at random from these 189 (without replacement), what is the probability that all three had low birth weight?
+
+$P(\text{low & low & low}) = P(\text{low}) * P(\text{low given the 1st draw}) * P(\text{low given the first two draws}) = \frac{59}{189}\frac{58}{188}\frac{57}{187}= 0.02935578$
+
+### 1(c)
+
+If we choose one of the babies with low birth weight at random to evaluate further, what is the probability that they had a mother who did smoke?
+ 
+$P(Smoke|Low) = \frac{P (Smoke and Low)}{P(Low)} =\frac{30/189}{59/189} = \frac{30}{59} = 0.5084746$
+
+### 1(d)
+
+To what quantity should you compare the value from part (c) to see if there is a mathematical independence between low birth weight and mother's smoking in this group of 189 observations? Do this comparison and draw a conclusion.
+
+What would happen if smoke if independent from low? In that case, we should have $P(Smoke|Low) = P(Smoke) = P(Smoke|not \, Low)$.
+
+$P(Smoke) = \frac{74}{189} = 0.3915344 \neq P(Smoke|Low).$
+
+The inequality suggests that they are not independent in this group of 189 observations.
+
+
+
+## Probability
+
+Group discussion for ~ 15 minutes. Stand the "Finish" sign up on the table after finished.
+
+### Question
+
+**Exercise 2.** A hospital has three emergency generators for use in case of a power failure. Each generator operates independently and the manufacturer claims that the probability each generator will function properly during a power failure is 0.95. 
+
+> a. Complete the table below by calculating the probability that 0, 1, 2, or 3 of the emergency generators will **fail** during the next power outage.
+
+| Number of Failures | P(X = x) |
+|:------------------:|:--------:|
+| 0                  |          |
+| 1                  |          |
+| 2                  |          |
+| 3                  |          |
+
+
+> b. Suppose a power failure occurs. What is the probability that at least one generator keeps working?
+
+> c. Explain (briefly) how you can use the following simulation to check your answer for parts a and b. Some questions to consider: Why did I define WillFail as I did? What values are stored into the CountFailed vector? What does the histogram show? 
+
+```{r, eval=TRUE}
+WillFail <- c(rep(1,5), rep(0,95))
+iterations <- 100000
+CountFailed <- rep(0,iterations)
+
+set.seed(1)
+for (i in 1:iterations){
+  samp <- sample(WillFail,3, replace=TRUE)
+  CountFailed[i] <- sum(samp)
+}
+
+hist(CountFailed, labels = TRUE, ylim = c(0, 95000),
+     breaks = seq(-0.5, 3.5, 1))
+
+#emperical check of part (b)
+sum(CountFailed < 3) / iterations
+1 - (sum(CountFailed == 3) / iterations)
+```
+
+
+### 2(a)
+
+Complete the table below by calculating the probability that 0, 1, 2, or 3 of the emergency generators will **fail** during the next power outage.
+
+Let's use F to denote **fail** and use S to denote function properly. Then for a single emergency generator, $P(S) = 0.95$ and $P(F) = 1 - P(S) = 0.05$.
+
+$P(\text{0 failure}) = P(SSS) = (0.05)^0(0.95)^3=0.857375.$
+
+$P(\text{1 failure}) = P(FSS) + P(SFS) + P(SSF) = 3*(0.05)^1(0.95)^2 = 0.135375.$
+
+$P(\text{2 failures}) = P(SFF) +P(FSF)+P(FFS)=3*(0.05)^2(0.95)^1 = 0.007125.$
+
+$P(\text{3 failures}) = P(FFF) = (0.05)^3(0.95)^0 = 0.000125.$
+
+### 2(b)
+
+Suppose a power failure occurs. What is the probability that at least one generator keeps working?
+
+$P(\text{at least one generator keeps working}) = P(\text{0, 1, or 2 failures}) = 1 - P(\text{3 fails}) = 1 - 0.000125 = 0.999875.$
+
+### 2(c)
+
+Explain (briefly) how you can use the following simulation to check your answer for parts a and b. Some questions to consider: Why did I define WillFail as I did? What values are stored into the CountFailed vector? What does the histogram show? 
+
+```{r, eval=TRUE}
+WillFail <- c(rep(1,5), rep(0,95)) # will generate a vector of 5 ones and 95 zero's.
+iterations <- 100000 # we will repeat the experiment for 100000 times
+CountFailed <- rep(0,iterations) # this is a length-100000 vector for storing the number of failures in each replicate.
+
+set.seed(1)
+for (i in 1:iterations){
+  samp <- sample(WillFail,3, replace=TRUE)
+  CountFailed[i] <- sum(samp)
+}
+
+hist(CountFailed, labels = TRUE, ylim = c(0, 95000),
+     breaks = seq(-0.5, 3.5, 1))
+
+#emperical check of part (b)
+sum(CountFailed < 3) / iterations
+1 - (sum(CountFailed == 3) / iterations)
+```
+
