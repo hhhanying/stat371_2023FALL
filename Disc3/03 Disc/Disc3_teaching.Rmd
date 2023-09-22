@@ -9,6 +9,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+# Download the Discussion 3 handout from Canvas
+
 ## Warmup
 
 Work on the Week 3 Quiz question 4 with your neighbor.
@@ -18,23 +21,14 @@ A manufacturer of carbon monoxide detectors knows that 2% of its detectors are i
 
 4.1 Assuming that the detectors are independent, what is the probability that a randomly selected detector is not defective?
 
-4.2 Find the probability that all 44 detectors are NOT defective.
+4.2 Find the probability that all 4 detectors are NOT defective.
 
 4.3 Find the probability that at least one of the selected detectors is defective. 
-
-### Solution
-
-4.1 1 - 2% = 0.98
-
-4.2 0.98 ^ 4 = 0.92
-
-4.3 1 - 0.92 = 0.08
-
 
 
 ## Relationship between two variables within a single group
 
-Group discussion for ~ 15 minutes. Stand the "Finish" sign up on the table after finished.
+Group discussion about exercise 1(a) - (d) for ~ 15 minutes. 
 
 ### Question
 
@@ -90,7 +84,7 @@ $P(\text{low & low & low}) = P(\text{low}) * P(\text{low given the 1st draw}) * 
 
 If we choose one of the babies with low birth weight at random to evaluate further, what is the probability that they had a mother who did smoke?
  
-$P(Smoke|Low) = \frac{P (Smoke and Low)}{P(Low)} =\frac{30/189}{59/189} = \frac{30}{59} = 0.5084746$
+$P(Smoke|Low) = \frac{P (\text{Smoke and Low})}{P(Low)} =\frac{30/189}{59/189} = \frac{30}{59} = 0.5084746$
 
 ### 1(d)
 
@@ -127,13 +121,13 @@ Group discussion for ~ 15 minutes. Stand the "Finish" sign up on the table after
 > c. Explain (briefly) how you can use the following simulation to check your answer for parts a and b. Some questions to consider: Why did I define WillFail as I did? What values are stored into the CountFailed vector? What does the histogram show? 
 
 ```{r, eval=TRUE}
-WillFail <- c(rep(1,5), rep(0,95))
-iterations <- 100000
-CountFailed <- rep(0,iterations)
+WillFail <- c(rep(1,5), rep(0,95)) # will generate a vector of 5 ones and 95 zero's.
+iterations <- 100000 # we will repeat the experiment for 100000 times
+CountFailed <- rep(0,iterations) # this is a length-100000 vector for storing the number of failures in each replicate.
 
-set.seed(1)
+set.seed(1) # not important
 for (i in 1:iterations){
-  samp <- sample(WillFail,3, replace=TRUE)
+  samp <- sample(WillFail,3, replace=TRUE) # draw three numbers from the vector WillFail without replacement
   CountFailed[i] <- sum(samp)
 }
 
@@ -170,15 +164,65 @@ $P(\text{at least one generator keeps working}) = P(\text{0, 1, or 2 failures}) 
 
 Explain (briefly) how you can use the following simulation to check your answer for parts a and b. Some questions to consider: Why did I define WillFail as I did? What values are stored into the CountFailed vector? What does the histogram show? 
 
-```{r, eval=TRUE}
-WillFail <- c(rep(1,5), rep(0,95)) # will generate a vector of 5 ones and 95 zero's.
-iterations <- 100000 # we will repeat the experiment for 100000 times
-CountFailed <- rep(0,iterations) # this is a length-100000 vector for storing the number of failures in each replicate.
+\vspace{1cm}
 
+#### understand the logic of simulation
+
+ > A simulation is an imitative representation of a process or system that could exist in the real world. -- wikipedia
+ 
+In this question, we want to know the probability that 0, 1, 2, or 3 of the emergency generators will **fail** during the next power outage.
+
+How can we estimate it?
+
+* Produce many power outages (not recommended)
+* Use a random number generator to mimic the outages
+
+
+
+#### WillFail
+
+```{r}
+WillFail <- c(rep(1,5), rep(0,95)) # will generate a vector of 5 ones and 95 zero's.
+WillFail
+```
+
+If we draw one number `one.samp` from `WillFail` randomly, then $P(one.samp = 1) = 5 / 100 = P(F)$. Thus, we can use random sample from `WillFail` to mimic the distribution of failures.
+
+#### set.seed() (only if interested)
+
+If we directly draw random examples, we cannot reproduce the results later, as we would draw different numbers every time.
+
+```{r}
+# 1st draw
+sample(WillFail,3, replace=TRUE)
+# 2nd draw
+sample(WillFail,3, replace=TRUE)
+# 3rd draw
+sample(WillFail,3, replace=TRUE)
+```
+
+By providing a `seed` to R, you can "fix" the random number generator.
+
+```{r}
 set.seed(1)
+sample(WillFail,3, replace=TRUE)
+set.seed(1)
+sample(WillFail,3, replace=TRUE)
+```
+
+`set.seed()` is not necessary for the simulations, as we believe that if the iteration times are large enough, we will observe similar results. But it is highly recommended to, as if you observe something wired, or want to investigate some observations further, by `set.seed()` you can always recover the random numbers you generated.
+
+#### simulation
+
+```{r, eval=TRUE}
+iterations <- 100000 
+CountFailed <- rep(0,iterations) 
+
+set.seed(1) 
+
 for (i in 1:iterations){
-  samp <- sample(WillFail,3, replace=TRUE)
-  CountFailed[i] <- sum(samp)
+  samp <- sample(WillFail,3, replace=TRUE) # draw three numbers from the vector WillFail without replacement
+  CountFailed[i] <- sum(samp) # record the number of failures in this sample
 }
 
 hist(CountFailed, labels = TRUE, ylim = c(0, 95000),
