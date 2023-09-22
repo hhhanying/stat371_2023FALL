@@ -10,6 +10,19 @@ output:
 
 In our discussion, students are supposed to form random small groups and discuss with each other.
 
+## Summary for R
+
+* Use `read.csv` function to read data from a `.csv` file.
+* Use `$` to extract one column from a data frame.
+* Use `as.factor()` to transfer a numeric variable to be categorical variable.
+* Use `str()` to check the data structure (or try to click the arrow near the variable name in the environment panel).
+* Use `View()` to open the data (or try to click the variable name in the environment panel.)
+* Use `boxplot()` to create boxplots with the `names = ` option to specify the labels of the boxes.
+* Use `hist()` to generate histograms with `breaks = ` option to specify the breakpoints and `ylim = ` option to specify the range of y axis.
+* Use `subset()` to extract subset of data. Pay attention to the difference of `==` and `=` (`==` compares the values of both sides and determine whether they are equal. Try `1 == 1` and `1 == 2` and you'll get `TRUE` and `FALSE`. `=` assigns the value of RHS to the variable LHS. `a = 1` is the same as `a <- 1`. `1 = 1` will create ERROR).
+* Use `c()` and `seq()` to create vectors.
+* Use R to calculate numeric summaries: `mean()`, `median()`, `sd()`, `quantile()`, and `IQR().`
+
 
 ## Check usage of homework auto-grade and submission
 
@@ -89,10 +102,10 @@ Try to run `View(lbw)` or click `lbw` in the environment.
 
 ### 2(a)
 
-* bwt is the birth weight (in grams) for each of the 189 babies observed.
-* low is a variable that is 0 if the birth weight is at least 2500 g and 1 if the birth weight is less than
+* `bwt` is the birth weight (in grams) for each of the 189 babies observed.
+* `low` is a variable that is 0 if the birth weight is at least 2500 g and 1 if the birth weight is less than
 2500 g.
-* smoke is a variable that is 0 if mother reported not smoking during pregnancy and 1 if mother reported smoking during pregnancy.
+* `smoke` is a variable that is 0 if mother reported not smoking during pregnancy and 1 if mother reported smoking during pregnancy.
 
 Identify the variable type for each of the three variables based on the description. Check the variable type in R. Does the data type in R agree with the true meaning of these variables?
 
