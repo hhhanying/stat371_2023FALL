@@ -1,0 +1,12 @@
+* CI
+  - CI for population mean: Z and t
+  - CI for population proportion: Z
+  - Bootstrapping: lec 10.05 Page 18
+* Hypothesis testing (from 10.05)
+  - know how to write down the $H_A$ and $H_0$ in the context.
+  - Concepts: type I error, type II error
+  - Know how to find the $Z$- or $t$-cutoff
+  - One sample tests: Z or t
+* Population proportion (10.17)
+  - assumptions for CI: >5 rule.
+  - only Z CI
