@@ -108,12 +108,16 @@ pnorm(8, 7.5, .8)-pnorm(7.2, 7.5, .8)
 A watermelon of that variety (A) has a weight that is 0.5 standard deviations above the mean. What proportion of watermelons of that variety (A) are heavier than this one?
 
 <br/><br/><br/><br/><br/><br/>
+\vspace{5cm}
+
+
 
 The weight of this watermelon is $mean + 0.5 * SD =7.5 + 0.5 * 0.8 = 7.9$. Then the proportion of watermelons of that variety (A) are heavier than this one is $P(X > 7.9) = 1-P(X<7.9)$.
 
 ```{r}
 1 - pnorm(7.9, 7.5, 0.8)
 ```
+
 
 Can we solve question 1(b) without knowing the mean and standard deviation of the watermelon weights?
 
@@ -126,6 +130,9 @@ The Z-score of this watermelon is $0.5$. Watermelons having a larger weight is t
 ### 1(c)
 
 Ten watermelons are chosen at random from that variety (A). What is the probability that exactly 2 of them weigh more than 8.5 kg? Assume that the weights of the 10 watermelons are identical to X and independent since the population is very large. (Sampling such a small number of watermelons without replacement will not functionally change the probability of the outcome of subsequent watermelons.)
+
+<br/><br/><br/><br/><br/><br/>
+\vspace{5cm}
 
 View choosing each watermelon as an event, the outcome that the watermelon has a weight more than 8.5 Kg as successful. Then what is the distribution of the number of success?
 
@@ -151,6 +158,11 @@ dbinom(2, 10, 0.1056498)
 
 Watermelons from another variety (B) have weights well approximated by a normal distribution with mean 8.6 kg and standard deviation of 0.5 kg $X~\sim N(8.6, 0.5^2)$. What weight watermelon from variety B would be at the same percentile as a watermelon from variety A that weighs 8.3 kg relative to their respective populations?
 
+<br/><br/><br/><br/><br/><br/>
+\vspace{5cm}
+
+
+
 If two watermelons from different varieties are at the same percentile relative to their respective populations, they should have the same z-score.
 
 Z-score for the watermelon from variety A that weighs 8.3 kg:
@@ -163,6 +175,7 @@ $$z = \frac{? - 8.6}{0.5} = 1.$$
 Thus, it weighs 9.1 Kg.
 
 <br/><br/><br/><br/><br/><br/>
+\vspace{5cm}
 
 
 # Exercise 2
@@ -219,6 +232,9 @@ P_XX=c(11/20, 8/20, 1/20)
 ### 2(a)
 
 What is the probability that if Darion helps for 5 hours (and draws from the bag 5 times), he selects at least 3 bills that are more than 10 dollars? Interpret the probability value in terms of percent of samples that could be observed.
+
+<br/><br/><br/><br/><br/><br/>
+\vspace{5cm}
 
 Is every selection independent? Why?
 
