@@ -11,11 +11,15 @@ output:
 knitr::opts_chunk$set(echo = TRUE, tidy.opts=list(width.cutoff=90),tidy=TRUE)
 ```
 
+# Announcement
+
+Next week's discussion will be Q&A section. I will appreciate it if you can let me know what question/concept confuse you in advance.
 
 # Concept clarification: hw 7 Ex 1 (c)
 
-Power / Type I error / Type II error
+Power / Type I error($\alpha$) / Type II error ($\beta$)
 
+(Visualize the type I error and type II error. Use the figure to illustrate how $\alpha$, population SD $\sigma$, sample size $n$, and the difference between the true population mean and the $\mu_0$ in the hypothesis will influence the power.)
 
 
 \newpage
