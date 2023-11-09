@@ -1,0 +1,202 @@
+---
+title: "Discussion 13"
+author: "Hanying Jiang"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Warmup 
+
+Discuss the Week 13 Quiz question 2 with the classmates around you.
+
+# Exercise 1
+
+## Question
+
+We measured the heights and weights of 4 randomly chosen people between 18 and 24 years old. A plot of the data is given below.
+
+```{r, out.width=250}
+weight <- c(50, 60, 70, 80)
+height <- c(151, 165, 178, 192)
+plot(weight, height)
+```
+
+> a. Describe the relationship between height and weight.  Based on this graph, does a straight-line model seem reasonable?
+
+> b. Below is a summary of a linear model fit in R. How do these summary values match the visual interpretation of the data in (a)?
+
+```{r, eval = FALSE}
+disc14_mod <- lm(height ~ weight)
+summary(disc14_mod)
+```
+
+\newpage
+
+## Solution
+
+### (a)
+
+Describe the relationship between height and weight.  Based on this graph, does a straight-line model seem reasonable?
+
+```{r, out.width=350}
+weight <- c(50, 60, 70, 80)
+height <- c(151, 165, 178, 192)
+plot(weight, height)
+```
+
+We see a very strong, positive, linear relationship between height and weight. Since the points are roughly on a straight line, we can assume a linear model is reasonable.
+
+### (b)
+
+Below is a summary of a linear model fit in R. How do these summary values match the visual interpretation of the data in (a)?
+
+```{r}
+disc14_mod <- lm(height ~ weight)
+summary(disc14_mod)
+```
+
+The slope coefficient for weight has a positive value, with a very small p-value. This matches the fact that we noticed a strong positive relationship.
+
+\newpage
+
+# Exercise 2
+
+## Question
+
+The values and some summary measures for the height and weight data are given below. You can also use the fact that $\sum_{i=1}^4{(x-\bar{x})(y-\bar{y})} = 680$.
+
+\begin{center}
+	\begin{tabular}{c|c|c}
+		Student & x: wts (kg) & y: hts (cm)\\
+		\hline
+		1 & 50 & 151 \\
+		2 & 60 & 165 \\
+		3 & 70 & 178 \\
+		4 & 80 & 192 \\
+\end{tabular}
+
+\begin{tabular}{c|c|c}
+\hline
+Variable & Mean & Standard Deviation \\
+\hline
+Weight (x) & 65 & 12.91 \\
+\hline
+Height (y) & 171.5 & 17.56 \\
+\hline
+\end{tabular}
+\end{center}
+
+```{r}
+weight <- c(50, 60, 70, 80)
+height <- c(151, 165, 178, 192)
+W.mean <- mean(weight); W.sd <- sd(weight)
+H.mean <- mean(height); H.sd <- sd(height)
+
+sum((weight - W.mean)*(height - H.mean)) #680
+```
+
+For all of the parts below, please perform the calculations "by hand" and show your work. Use built-in R functions and/or the summary in 1(b) to confirm your answers. 
+
+In practice, we would typically want way more than 4 points to ensure a linear model is reasonable in the population of points and that the estimates we get for the model are reliable. We have a small sample size in this toy example so the mechanics are easier to learn and practice.
+
+> a. Compute the sample correlation and the least square estimates for the y intercept and slope of the regression line relating height (y) to weight (x).  Make sure the estimates match the R output in 1(b).
+
+> b. Interpret the slope and y intercept estimates from (a) in the context of the question. 
+
+> c. Write out the least squares regression line  and use it to calculate the 4 fitted values of height for the observed weights. Also, calculate the 4 residual values.
+
+> d. Create a residual plot  (x=fitted values, y=residuals) and a QQ plot of the residuals. Do the necessary regression assumptions seem met?
+
+> e. Compute the quantity: $\frac{\sum{Residuals^2}}{n-2}$. What is this quantity called and what does it mean? Note where this quantity (or a related quantity) can be found in the summary of our lm object.
+
+> f. Find the standard error of the estimated slope $\hat{\beta}_1$.
+
+> g. Perform  a t-test at $\alpha = 0.05$ for the following hypotheses about the slope of the least squares regression line (compute the observed test statistic, p value, and draw a conclusions)
+
+>> (i) 
+
+\begin{center}
+		$H_{0}: \beta_{1} \le 0$\\
+		vs.\\
+		$H_{A}: \beta_{1} > 0$,
+	\end{center}
+
+>> (ii)
+
+\begin{center}
+	$H_{0}: \beta_{1} = 1$\\
+	vs.\\
+	$H_{A}: \beta_{1} \ne 1$,
+\end{center}
+
+
+## Solution
+
+### (a)
+
+Compute the sample correlation and the least square estimates for the y intercept and slope of the regression line relating height (y) to weight (x).  Make sure the estimates match the R output in 1(b).
+
+
+```{r}
+weight <- c(50, 60, 70, 80)
+height <- c(151, 165, 178, 192)
+W.mean <- mean(weight); W.sd <- sd(weight)
+H.mean <- mean(height); H.sd <- sd(height)
+```
+```{r, echo = F}
+cat(paste0(
+  "W.mean = ", W.mean, "; \n",
+  "W.sd = ", W.sd, "; \n",
+  "H.mean = ", H.mean, "; \n",
+  "H.sd = ", H.sd, "."
+))
+sum((weight - W.mean)*(height - H.mean)) #680
+```
+
+**Correlation**
+
+$$r = \frac{\sum_i(x_i - \bar{x})(y_i - \bar{y})}{(n-1)s_xs_y} = \frac{680}{(4-1)*12.91 * 17.56} = 0.999854.$$
+
+**Intercept**
+
+$$\hat{\beta}_1 = r(\frac{s_y}{s_x}) = 0.999854 * (\frac{17.56}{12.91}) = 1.36.$$
+
+**Slope**
+
+$$\hat{\beta}_0 = \bar{y} - \hat{\beta}_1\bar{x} = 171.5 - 1.36 * 65 = 83.1.$$
+### (b)
+
+Interpret the slope and y intercept estimates from (a) in the context of the question. 
+
+
+### (c)
+
+Write out the least squares regression line  and use it to calculate the 4 fitted values of height for the observed weights. Also, calculate the 4 residual values.
+
+### (d)
+
+Create a residual plot  (x=fitted values, y=residuals) and a QQ plot of the residuals. Do the necessary regression assumptions seem met?
+
+### (e)
+
+
+Compute the quantity: $\frac{\sum{Residuals^2}}{n-2}$. What is this quantity called and what does it mean? Note where this quantity (or a related quantity) can be found in the summary of our lm object.
+
+### (f)
+
+
+Find the standard error of the estimated slope $\hat{\beta}_1$.
+
+### (g)
+
+Perform  a t-test at $\alpha = 0.05$ for the following hypotheses about the slope of the least squares regression line (compute the observed test statistic, p value, and draw a conclusions)
+
+
+
+
