@@ -67,7 +67,7 @@ bwtSmokeN <- SmokeN$bwt
 
 *Bootstrap T Tools?*
 
-> d. Calculate the observed t test statistic and p value for the hypothesis test of $H_0: \mu_{bwtN}-mu_{bwtY}=0$ vs $H_A: \mu_{bwtN}-mu_{bwtY}\ne 0$ assuming equal population variances. Confirm your findings with t.test and look at the corresponding 98% CI.  You can use the summary values below:
+> d. Calculate the observed t test statistic and p value for the hypothesis test of $H_0: \mu_{bwtN}-\mu_{bwtY}=0$ vs $H_A: \mu_{bwtN}-\mu_{bwtY}\ne 0$ assuming equal population variances. Confirm your findings with t.test and look at the corresponding 98% CI.  You can use the summary values below:
 
 | Birthweight Summary Values | Smoke: Yes | Smoke: No |
 |:-:|:-:|:-:|
@@ -85,9 +85,9 @@ bwtSmokeN <- SmokeN$bwt
 
 *Confirm findings in R*
 
-> e. Use `t.test()` on this same data to perform a Welch's T test of $H_0: \mu_{bwtN}-mu_{bwtY}=0$ vs $H_A: \mu_{bwtN}-mu_{bwtY}\ne 0$ at a 2\% significance level. Also read off the 98\% t CI for  $\mu_{bwtN}-mu_{bwtY}$ that results when you  allow variances to differ. How do the results compare to (d)? (If you want more practice, you should try to confirm these calculations "by hand" from the summary values given.)
+> e. Use `t.test()` on this same data to perform a Welch's T test of $H_0: \mu_{bwtN}-\mu_{bwtY}=0$ vs $H_A: \mu_{bwtN}-\mu_{bwtY}\ne 0$ at a 2\% significance level. Also read off the 98\% t CI for  $\mu_{bwtN}-\mu_{bwtY}$ that results when you  allow variances to differ. How do the results compare to (d)? (If you want more practice, you should try to confirm these calculations "by hand" from the summary values given.)
 
-> f. Also perform a bootstrap t-tesst of $H_0: \mu_{bwtN}-mu_{bwtY}=0$ vs $H_A: \mu_{bwtN}-mu_{bwtY}\ne 0$ at a 2\% significance level.  How do the results compare to your findings in (d) and (e)?
+> f. Also perform a bootstrap t-tesst of $H_0: \mu_{bwtN}-\mu_{bwtY}=0$ vs $H_A: \mu_{bwtN}-\mu_{bwtY}\ne 0$ at a 2\% significance level.  How do the results compare to your findings in (d) and (e)?
 
 ```{r, eval = FALSE}
 # 1. Calculate data summaries and t_obs
@@ -201,7 +201,7 @@ We can also use bootstrap. Although as sample size is large enough, we typically
 
 ### (d)
 
-Calculate the observed t test statistic and p value for the hypothesis test of $H_0: \mu_{bwtN}-mu_{bwtY}=0$ vs $H_A: \mu_{bwtN}-mu_{bwtY}\ne 0$ assuming equal population variances. Confirm your findings with t.test and look at the corresponding 98% CI.  You can use the summary values below:
+Calculate the observed t test statistic and p value for the hypothesis test of $H_0: \mu_{bwtN}-\mu_{bwtY}=0$ vs $H_A: \mu_{bwtN}-\mu_{bwtY}\ne 0$ assuming equal population variances. Confirm your findings with t.test and look at the corresponding 98% CI.  You can use the summary values below:
 
 | Birthweight Summary Values | Smoke: Yes | Smoke: No |
 |:-:|:-:|:-:|
@@ -265,7 +265,7 @@ We got the same test statistic and p-value as our calculation. Besides, the $98\
 
 ### (e)
 
-Use `t.test()` on this same data to perform a Welch's T test of $H_0: \mu_{bwtN}-mu_{bwtY}=0$ vs $H_A: \mu_{bwtN}-mu_{bwtY}\ne 0$ at a 2\% significance level. Also read off the 98\% t CI for  $\mu_{bwtN}-mu_{bwtY}$ that results when you allow variances to differ. How do the results compare to (d)? (If you want more practice, you should try to confirm these calculations "by hand" from the summary values given.)
+Use `t.test()` on this same data to perform a Welch's T test of $H_0: \mu_{bwtN}-\mu_{bwtY}=0$ vs $H_A: \mu_{bwtN}-\mu_{bwtY}\ne 0$ at a 2\% significance level. Also read off the 98\% t CI for  $\mu_{bwtN}-\mu_{bwtY}$ that results when you allow variances to differ. How do the results compare to (d)? (If you want more practice, you should try to confirm these calculations "by hand" from the summary values given.)
 
 ```{r}
 t.test(bwtSmokeN, bwtSmokeY, conf.level = 0.98, var.equal = F)
@@ -279,7 +279,7 @@ Compared to (d), the Welch's t test has a slightly more extreme test statistic, 
 
 ### (f)
 
-Also perform a bootstrap t-tesst of $H_0: \mu_{bwtN}-mu_{bwtY}=0$ vs $H_A: \mu_{bwtN}-mu_{bwtY}\ne 0$ at a 2\% significance level.  How do the results compare to your findings in (d) and (e)?
+Also perform a bootstrap t-tesst of $H_0: \mu_{bwtN}-\mu_{bwtY}=0$ vs $H_A: \mu_{bwtN}-\mu_{bwtY}\ne 0$ at a 2\% significance level.  How do the results compare to your findings in (d) and (e)?
 
 ```{r}
 # 1. Calculate data summaries and t_obs
