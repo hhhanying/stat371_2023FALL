@@ -11,9 +11,17 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Warmup 
+# Week 13 discussion
 
-Discuss the Week 13 Quiz question 2 with the classmates around you.
+Announcement: as Jana mentioned on Tuesday, the midterm 2 grades will be adjusted for misconduct soon. 
+
+Review
+
+- Notations
+- Compute coefficient estimate
+- Hypothesis testing of $\hat{\beta}_1$.
+
+\newpage
 
 # Exercise 1
 
@@ -170,33 +178,132 @@ $$\hat{\beta}_1 = r(\frac{s_y}{s_x}) = 0.999854 * (\frac{17.56}{12.91}) = 1.36.$
 **Slope**
 
 $$\hat{\beta}_0 = \bar{y} - \hat{\beta}_1\bar{x} = 171.5 - 1.36 * 65 = 83.1.$$
+
+**Fitted model**
+
+$$\hat{height} = 83.1 + 1.36*weight.$$
+
 ### (b)
 
 Interpret the slope and y intercept estimates from (a) in the context of the question. 
 
+Intercept $83.1$: The average height of a person with no weight is $83.1$ cm. This value is not useful for interpretation (it is not good practice to apply your model outside the range of x values were it was built, and a person with weight 0 makes no sense anyway). 
+
+Slope $1.36$: The average height is expected to increase by $1.36$ cm when weight
+increases by $1$ kg.
 
 ### (c)
 
-Write out the least squares regression line  and use it to calculate the 4 fitted values of height for the observed weights. Also, calculate the 4 residual values.
+Write out the least squares regression line and use it to calculate the 4 fitted values of height for the observed weights. Also, calculate the 4 residual values.
+
+Regression line: $\hat{height} = 83.1 + 1.36*weight.$
+
+Fitted values are obtained by plugging the $x$-values into regression equation. Residuals are obtained by subtracting $observed - expected$.
+
+For example, with the observed weight $50$ kg, the fitted value is $83.1 + 1.36 * 50 = 151.1$. And the residual is $151 - 151.1 = -0.1$.
+
+All fitted values are $151.1, 164.7, 178.3, 191.9$. All residuals are $-0.1, 0.3, -0.3, 0.1$.
+
+```{r}
+# Compute them by hand
+y_hats <- 83.1 + 1.36*weight
+resid <- height - y_hats
+# Grab them from R
+# disc14_mod <- lm(height ~ weight) # recall disc14_mod is the fit object
+residuals <- resid(disc14_mod)
+fitted <- fitted(disc14_mod)
+```
 
 ### (d)
 
 Create a residual plot  (x=fitted values, y=residuals) and a QQ plot of the residuals. Do the necessary regression assumptions seem met?
 
+```{r, out.width=250}
+plot(fitted, residuals)
+qqnorm(residuals)
+```
+
+Clearly the QQ plot is showing a straight line and hence assumption of normality of errors is fine. 
+The fitted vs residual plot is also showing that the points are randomly scattered and the width around line $y = 0$ across the fitted values are more or less same. 
+We have so few points, however, that it is impossible to check this assumption well from our sample data. 
+The assumption of constant variance is plausible, but ideally we would have more data to evaluate to be more sure.
+
 ### (e)
 
+Compute the quantity: $\frac{\sum{Residuals^2}}{n-2}$. What is this quantity called and what does it mean? Note where this quantity (or a related quantity) can be found in the summary of our `lm` object.
 
-Compute the quantity: $\frac{\sum{Residuals^2}}{n-2}$. What is this quantity called and what does it mean? Note where this quantity (or a related quantity) can be found in the summary of our lm object.
+$$\frac{\sum{Residuals^2}}{n-2} = \frac{(-0.1)^2 +0.3^2 + (-0.3)^2 + 0.1^2}{4-2}=0.1$$
+
+This quantity is often referred to as Mean Square Error (MSE) and is used to estimate
+the variance of the population of errors around the least squares regression line.
+
+Residual standard error ($\sigma$) is $\sqrt{MSE}$, can be found at the bottom of the summary table.
+
+```{r}
+sqrt(0.1)
+summary(disc14_mod)
+```
 
 ### (f)
 
-
 Find the standard error of the estimated slope $\hat{\beta}_1$.
+
+$$\hat{se}(\hat{\beta}_1) = \frac{\sigma}{\sqrt{\sum(x_i - \bar{x})^2}}=\frac{\sigma}{\sqrt{SSx}}=\frac{0.3162278}{\sqrt{3 * 12.91^2}} = 0.01414.$$
 
 ### (g)
 
 Perform  a t-test at $\alpha = 0.05$ for the following hypotheses about the slope of the least squares regression line (compute the observed test statistic, p value, and draw a conclusions)
 
+**(i)**
+
+\begin{center}
+		$H_{0}: \beta_{1} \le 0$\\
+		vs.\\
+		$H_{A}: \beta_{1} > 0$,
+	\end{center}
 
 
+*test statistic*
+
+$$t_{obs} = \frac{\hat{\beta}_1 - 0}{\hat{se}(\hat{\beta}_1)}=\frac{1.36-0}{0.01414} = 96.18105.$$
+
+*degrees of freedom*
+
+$$df = n - 2 = 4 - 2 = 2.$$
+
+*p value*
+
+Becaues the alternative hypothesis is ">", the p value is $P(t_2 \geq t_{obs}) = 5.404065e-05.$
+
+```{r}
+# pt(96.18105, 2, lower.tail = FALSE) 
+# the code above should give the same results
+1 - pt(96.18105, 2)
+```
+
+*Draw conclusion*
+
+The p-value is smaller than $\alpha = 0.05$. We reject $H_0$ and have strong evidence that there is a positive linear relationship between height and weight.
+
+**(ii)**
+
+\begin{center}
+	$H_{0}: \beta_{1} = 1$\\
+	vs.\\
+	$H_{A}: \beta_{1} \ne 1$,
+\end{center}
+
+*test statistic*
+
+$$t_{obs} = \frac{\hat{\beta}_1 - 1}{\hat{se}(\hat{\beta}_1)}=\frac{1.36-1}{0.01414} = 25.45969.$$
+
+*p value*
+
+```{r}
+2 * (1 - pt(25.45969, df = 2))
+```
+
+*Draw conclusion*
+
+Since the p-value is very low we can reject $H_0 : \beta_1 = 1$. Evidence suggests the positive linear relationship between height and weight does not have a slope of 1.
 
