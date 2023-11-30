@@ -171,11 +171,11 @@ sum((weight - W.mean)*(height - H.mean)) #680
 
 $$r = \frac{\sum_i(x_i - \bar{x})(y_i - \bar{y})}{(n-1)s_xs_y} = \frac{680}{(4-1)*12.91 * 17.56} = 0.999854.$$
 
-**Intercept**
+**Slope**
 
 $$\hat{\beta}_1 = r(\frac{s_y}{s_x}) = 0.999854 * (\frac{17.56}{12.91}) = 1.36.$$
 
-**Slope**
+**Intercept**
 
 $$\hat{\beta}_0 = \bar{y} - \hat{\beta}_1\bar{x} = 171.5 - 1.36 * 65 = 83.1.$$
 
